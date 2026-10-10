@@ -1,5 +1,6 @@
 import allure
 import pytest
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions as EC
@@ -28,7 +29,9 @@ def _wait_text_visible(driver: WebDriver, text: str) -> None:
 @allure.feature("UI")
 @allure.story("Поиск")
 @pytest.mark.ui
-def test_search_film_by_name(driver: WebDriver, search_page: SearchPage) -> None:
+def test_search_film_by_name(
+    driver: WebDriver, search_page: SearchPage
+) -> None:
     """UI-001: поиск «Аватар» открывает страницу с результатами."""
     search_page.search("Аватар")
     _wait_text_visible(driver, "Аватар")
@@ -46,7 +49,9 @@ def test_search_suggestions_appear(search_page: SearchPage) -> None:
 @allure.feature("UI")
 @allure.story("Поиск")
 @pytest.mark.ui
-def test_search_series_by_name(driver: WebDriver, search_page: SearchPage) -> None:
+def test_search_series_by_name(
+    driver: WebDriver, search_page: SearchPage
+) -> None:
     """UI-005: «Во все тяжкие» находится в результатах."""
     search_page.search("Во все тяжкие")
     _wait_text_visible(driver, "Во все тяжкие")

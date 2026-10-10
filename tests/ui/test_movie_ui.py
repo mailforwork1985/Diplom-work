@@ -1,5 +1,6 @@
 import allure
 import pytest
+import re
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from config.config import Config
@@ -31,5 +32,13 @@ def test_movie_card_opens(movie_page: MoviePage) -> None:
 @pytest.mark.ui
 def test_movie_rating_format(movie_page: MoviePage) -> None:
     """UI-004: рейтинг в формате X.X и не пустой."""
-    rating: str = movie_page.get_rating_text()
-    assert MoviePage.RATING_PATTERN.match(rating), f"Рейтинг «{rating}» не в формате X.X"
+    raw_rating: str = movie_page.get_rating_text()
+    # Извлекаем только цифры и точку из полученной строки
+    match = re.search(r'\d+\.\d+', raw_rating)
+    assert match, (
+        f"Не удалось найти рейтинг в формате X.X в строке: '{raw_rating}'"
+        )
+    rating = match.group()
+    assert MoviePage.RATING_PATTERN.match(rating), (
+        f"Рейтинг «{rating}» не в формате X.X"
+        )

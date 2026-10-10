@@ -8,7 +8,7 @@ Locator = tuple[str, str]
 class BasePage:
     """Базовый Page Object: навигация и ожидания."""
 
-    DEFAULT_TIMEOUT: int = 20
+    DEFAULT_TIMEOUT: int = 10
 
     def __init__(self, driver: WebDriver, base_url: str) -> None:
         self.driver: WebDriver = driver

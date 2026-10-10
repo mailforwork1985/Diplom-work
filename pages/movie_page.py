@@ -10,10 +10,10 @@ from pages.base_page import BasePage, Locator
 
 class MoviePage(BasePage):
     """Карточка фильма: название, рейтинг, описание."""
-
     TITLE: Locator = (By.CSS_SELECTOR, "h1")
     RATING: Locator = (By.CSS_SELECTOR, 
-                       ".film-rating-value, [data-test-id*='ratingNumber']")
+                       ".film-rating-value, [data-test-id*='ratingNumber']"
+                       )
     RATING_PATTERN: Pattern[str] = re.compile(r"^\d\.\d$")
 
     def __init__(self, driver: WebDriver, base_url: str) -> None:
